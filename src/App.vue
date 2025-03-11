@@ -3,10 +3,11 @@
 </template>
 
 <script setup lang="js">
-import { computed, ref } from 'vue';
+import { computed, onBeforeMount, ref } from 'vue';
 import Names from '@/pages/Names.vue';
 import Score from '@/pages/Score.vue';
 import NotFound from '@/pages/NotFound.vue';
+import { useScoreStore } from './stores/score';
 
 const routes = {
   '/': Names,
@@ -24,4 +25,12 @@ window.addEventListener('hashchange', () => {
 const currentView = computed(() => {
   return routes[currentPath.value.slice(1) || '/'] ?? NotFound;
 })
+
+
+const score = useScoreStore();
+
+onBeforeMount(() => {
+  score.loadData();
+})
+
 </script>

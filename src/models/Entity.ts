@@ -4,8 +4,33 @@ export class Game {
     public endRound: User | null = null;
     public gameStart: boolean = false;
 
-    public validRound(){
+    constructor(){
+        this.users = [new User(), new User()];
+    }
 
+    public fromJson(json: string){
+        const data = Object.assign(new Game(), JSON.parse(json)) as Game;
+        this.users = [];
+
+        data.users.forEach((u) => {
+            const user = new User();
+            user.name = u.name;
+            user.pointCurrentRound = u.pointCurrentRound;
+
+            u.points.forEach(p => {
+                const point = new Point(p.round, p.point, p.multiplicator);
+                user.points.push(point);
+            });
+
+            this.users.push(user);
+        });
+
+        this.round = data.round;
+        this.endRound = data.endRound;
+        this.gameStart = data.gameStart;
+    }
+
+    public validRound(){
         this.users.forEach((u) => {
             let multiplicator = 1;
 
@@ -25,10 +50,6 @@ export class Game {
         this.endRound = null;
 
         this.round++;
-    }
-
-    constructor(){
-        this.users = [new User(), new User()];
     }
 }
 
@@ -56,7 +77,6 @@ export class Point{
     public round: number;
     public point: number;
     public multiplicator: number;
-    public text: string = "";
 
     constructor(round: number, point: number, multiplicator: number = 1){
         this.round = round;

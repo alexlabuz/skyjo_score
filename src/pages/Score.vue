@@ -41,6 +41,8 @@
     </table>
 
     <button @click="score.validRound" :disabled="!getValidScore">Valider la manche</button>
+    <button @click="score.saveData()">Sauvagarder</button><br><br>
+    <button @click="score.removeData()">Supprimer score</button>
 </template>
 
 <script setup lang="ts">
