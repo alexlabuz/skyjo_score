@@ -1,16 +1,22 @@
 <template>
-    <table class="tableScore">
+<div class="page">
+    <div class="header">
+        <img @click="backName" src="/src/assets/icons/back.svg" class="pointer"/>
+        <p>Score</p>
+        <div></div>
+    </div>
+    <table class="table_score">
         <thead>
             <tr>
                 <th>Round</th>
-                <th v-for="name in score.data.users">{{ name.name }}</th>
+                <th class="name" v-for="name in score.data.users">{{ name.name }}</th>
             </tr>
         </thead>
         <tbody>
             <!--Points history-->
             <tr v-for="indexRound in score.data.round">
                 <td class="round_number">{{ indexRound }}</td>
-                <td v-for="point in score.data.users.map((u) => u.points)">
+                <td class="user_point" v-for="point in score.data.users.map((u) => u.points)">
                     {{ point.find((p) => p.round === indexRound-1)?.point }}
                     <span v-if="(point.find((p) => p.round === indexRound-1)?.multiplicator ?? 1) > 1" class="multiplicator_span">
                         {{ `x ${point.find((p) => p.round === indexRound-1)?.multiplicator}` }}
@@ -21,8 +27,8 @@
             <!--Points inputs-->
             <tr class="point_input">
                 <td class="round_number">{{ score.data.round + 1 }}</td>
-                <td v-for="(u, i) in score.data.users">
-                    <input type="number" v-model="u.pointCurrentRound" max="144" min="-20">
+                <td class="input_point" v-for="(u, i) in score.data.users">
+                    <input type="number" v-model="u.pointCurrentRound" max="120" min="-17">
                     <div>
                         <input :id="'end' + i" type="radio" :value="u" v-model="score.data.endRound"/>
                         <label :for="'end' + i">Fin</label>
@@ -33,21 +39,23 @@
             <!--Total-->
             <tr class="total">
                 <td class="round_number">Total</td>
-                <td v-for="totalPoint in score.data.users.map((u) => u.getSumPoint())">
+                <td class="total_user_point" v-for="totalPoint in score.data.users.map((u) => u.getSumPoint())">
                     {{ totalPoint }}
                 </td>
             </tr>
         </tbody>
     </table>
-
-    <button @click="score.validRound" :disabled="!getValidScore">Valider la manche</button>
-    <button @click="score.saveData()">Sauvagarder</button><br><br>
-    <button @click="score.removeData()">Supprimer score</button>
+    <div class="header">
+        <div></div>
+        <button @click="score.validRound" :disabled="!getValidScore" class="btn">Valider la manche</button>
+        <img src="/src/assets/icons/delete.svg" @click="score.removeData()" class="pointer" />
+    </div>
+</div>
 </template>
 
 <script setup lang="ts">
 import { useScoreStore } from '@/stores/score';
-import { computed, onBeforeMount } from 'vue';
+import { computed, onBeforeMount, onUnmounted } from 'vue';
 
 const score = useScoreStore();
 
@@ -61,7 +69,14 @@ const getValidScore = computed(() => {
     return !isExistEmptyCurrentScore && isEndUserSelected;
 });
 
+function backName() {
+    window.location.hash = "/";
+}
+
+onUnmounted(() => score.saveData());
+
 onBeforeMount(() => {
+    score.saveData();
     if(!score.data.gameStart){
 	    window.location.hash = '/';
     }
@@ -70,28 +85,48 @@ onBeforeMount(() => {
 </script>
 
 <style scoped>
-.tableScore{
+
+.page{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+/*-Table-*/
+.table_score{
+    border-collapse: collapse;
     display: block;
     overflow-y: auto;
-    border: 2px solid black;
     width: 100%;
+    flex-grow: 1;
+    font-size: 20px;
 }
 
-.tableScore td{
+.table_score{
     text-align: center;
 }
 
-.tableScore .total{
+/*-tr-*/
+tr.total{
     background-color: gray;
     color: white;
 }
-
-.tableScore .point_input{
+tr.point_input{
     background-color: antiquewhite;
 }
 
-.tableScore td.round_number{
-    width: 0;
+/*-td-*/
+td.round_number{
+    font-weight: bold;
+}
+td.user_point{
+}
+td.total_user_point{
+
+}
+
+td.input_point{
+    font-size: 16px;
 }
 
 .multiplicator_span{

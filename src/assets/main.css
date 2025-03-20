@@ -1,4 +1,29 @@
+html, body, #app{
+    height: 100%;
+}
+
 body{
     margin: 0;
     font-family: sans-serif;
+}
+
+input[type=text], input[type=number]{
+    padding: 5px;
+}
+
+.header{
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.pointer{
+    cursor: pointer;
+}
+
+.btn{
+    padding: 1em;
 }

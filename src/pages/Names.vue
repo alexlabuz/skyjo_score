@@ -1,15 +1,17 @@
 <template>
+<div class="page">
 	<h1>Saisir les noms</h1>
 
 	<div class="list_user">
 		<div v-for="(u, index) in score.data.users" class="user_name_input">
-			<input type="text" v-model="u.name" :placeholder="`Nom n°${index + 1}`" maxlength="12" />
-			<button @click="deleteUser(u)">Suppimer</button>
+			<input type="text" v-model="u.name" :placeholder="`Nom n°${index + 1}`" maxlength="12" :disabled="score.data.gameStart" />
+			<button @click="deleteUser(u)" :disabled="score.data.gameStart">Suppimer</button>
 		</div>
 	</div>
 
-	<button @click="addUser">Ajouter utilisateur</button>
-	<button :disabled="!getValidNames" @click="startGame">Commencer la partie</button>
+	<button @click="addUser" :disabled="score.data.gameStart">Ajouter utilisateur</button>
+	<button :disabled="!getValidNames" @click="startGame">{{ !score.data.gameStart ? 'Commencer la partie' : 'Afficher les score'}}</button>
+</div>
 </template>
 
 <script setup lang="ts">
@@ -38,6 +40,12 @@ function deleteUser(user: User) {
 </script>
 
 <style scoped>
+.page{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+	align-items: start;
+}
 .user_name_input {
 	display: flex;
 }
