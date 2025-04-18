@@ -44,6 +44,9 @@ export class Game {
 
             const point = new Point(this.round, u.pointCurrentRound ?? 0, multiplicator)
             u.points.push(point);
+        });
+
+        this.users.forEach((u) => {
             u.pointCurrentRound = null;
         });
 

@@ -9,7 +9,7 @@
 		</div>
 	</div>
 
-	<button @click="addUser" :disabled="score.data.gameStart">Ajouter utilisateur</button>
+	<button @click="addUser" :disabled="score.data.gameStart" style="margin-bottom: 1em;">Ajouter utilisateur</button>
 	<button :disabled="!getValidNames" @click="startGame">{{ !score.data.gameStart ? 'Commencer la partie' : 'Afficher les score'}}</button>
 </div>
 </template>
