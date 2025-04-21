@@ -18,20 +18,24 @@
 
 <script setup lang="ts">
 import { useScoreStore } from '@/stores/score';
-import { computed } from 'vue';
+import { computed, onBeforeMount } from 'vue';
 
 const score = useScoreStore();
-const ranking = computed(() => score.data.users.sort((a,b) => a.getSumPoint() - b.getSumPoint()))
-
+const ranking = computed(() => [...score.data.users].sort((a,b) => a.getSumPoint() - b.getSumPoint()))
 
 function backName() {
     window.location.hash = "/score";
 }
 
+onBeforeMount(() => {
+    if(!score.data.gameStart){
+	    window.location.hash = '/';
+    }
+});
+
 </script>
 
 <style scoped>
-
 .row_rang{
     width: 100%;
     border-collapse: collapse;
