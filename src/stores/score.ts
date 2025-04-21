@@ -28,7 +28,6 @@ export const useScoreStore = defineStore("score", () => {
         saveData();
     }
 
-
     return {
         data,
         validRound,

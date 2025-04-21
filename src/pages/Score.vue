@@ -46,7 +46,8 @@
         </tbody>
     </table>
     <div class="header">
-        <div></div>
+        
+        <img @click="goRanking" src="/src/assets/icons/ranking.svg" class="pointer"/>
         <button @click="score.validRound" :disabled="!getValidScore" class="btn">Valider la manche</button>
         <img src="/src/assets/icons/delete.svg" @click="score.removeData()" class="pointer" />
     </div>
@@ -73,6 +74,10 @@ function backName() {
     window.location.hash = "/";
 }
 
+function goRanking() {
+    window.location.hash = "/rank"
+}
+
 onUnmounted(() => score.saveData());
 
 onBeforeMount(() => {
@@ -87,11 +92,9 @@ onBeforeMount(() => {
 <style scoped>
 
 .page{
-    height: 100%;
-    display: flex;
-    flex-direction: column;
     justify-content: space-between;
 }
+
 /*-Table-*/
 .table_score{
     border-collapse: collapse;

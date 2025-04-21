@@ -20,6 +20,12 @@ input[type=text], input[type=number]{
     padding-right: 8px;
 }
 
+.page{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
 .pointer{
     cursor: pointer;
 }

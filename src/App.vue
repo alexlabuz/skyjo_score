@@ -6,12 +6,14 @@
 import { computed, onBeforeMount, ref } from 'vue';
 import Names from '@/pages/Names.vue';
 import Score from '@/pages/Score.vue';
+import Ranking from './pages/Ranking.vue';
 import NotFound from '@/pages/NotFound.vue';
 import { useScoreStore } from './stores/score';
 
 const routes = {
   '/': Names,
-  '/score': Score
+  '/score': Score,
+  '/rank': Ranking
 }
 
 const currentPath = ref(window.location.hash)

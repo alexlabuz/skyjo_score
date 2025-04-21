@@ -41,9 +41,6 @@ function deleteUser(user: User) {
 
 <style scoped>
 .page{
-    height: 100%;
-    display: flex;
-    flex-direction: column;
 	align-items: start;
 }
 .user_name_input {
