@@ -5,11 +5,11 @@
 	<div class="list_user">
 		<div v-for="(u, index) in score.data.users" class="user_name_input">
 			<input type="text" v-model="u.name" :placeholder="`Nom n°${index + 1}`" maxlength="12" :disabled="score.data.gameStart" />
-			<button @click="deleteUser(u)" :disabled="score.data.gameStart">Suppimer</button>
+			<button @click="deleteUser(u)" :disabled="isDeleteUserDisabled">Suppimer</button>
 		</div>
 	</div>
 
-	<button @click="addUser" :disabled="score.data.gameStart" style="margin-bottom: 1em;">Ajouter utilisateur</button>
+	<button @click="addUser" :disabled="isAddUserDisabled" style="margin-bottom: 1em;">Ajouter utilisateur</button>
 	<button :disabled="!getValidNames" @click="startGame">{{ !score.data.gameStart ? 'Commencer la partie' : 'Afficher les score'}}</button>
 </div>
 </template>
@@ -21,7 +21,10 @@ import { computed } from 'vue';
 
 const score = useScoreStore();
 
-const getValidNames = computed(() => !score.data.users.some(u => u.name === null || u.name.length <= 0))
+const isAddUserDisabled = computed(() => score.data.gameStart || score.data.users.length >= 8);
+const isDeleteUserDisabled = computed(() => score.data.gameStart || score.data.users.length <= 2);
+
+const getValidNames = computed(() => !score.data.users.some(u => u.name === null || u.name.length <= 0));
 
 function startGame() {
 	score.data.gameStart = true;
