@@ -39,8 +39,8 @@
             <!--Total-->
             <tr class="total">
                 <td class="round_number">Total</td>
-                <td class="total_user_point" v-for="totalPoint in score.data.users.map((u) => u.getSumPoint())">
-                    {{ totalPoint }}
+                <td v-for="user in score.data.users" class="total_user_point" :class="{lostPoint: user.hasLost()}">
+                    {{ user.getSumPoint() }}
                 </td>
             </tr>
         </tbody>
@@ -126,6 +126,10 @@ td.user_point{
 }
 td.total_user_point{
 
+}
+
+.lostPoint{
+    background-color: red;
 }
 
 td.input_point{

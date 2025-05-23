@@ -9,7 +9,10 @@
     <table class="row_rang">
         <tr v-for="(u, i) in ranking">
             <td class="position">{{ (i + 1) }}</td>
-            <td class="point">{{ u.getSumPoint() }}</td>
+            <td class="point">
+                <span>{{ u.getSumPoint() }}</span>
+                <span style="font-size: 12px;"> pts</span>
+            </td>
             <td>{{ u.name }}</td>
         </tr>
     </table>
@@ -59,9 +62,8 @@ onBeforeMount(() => {
     font-weight: bolder;
 }
 
-
 .row_rang td.point{
-    width: 50px;
+    width: 60px;
 }
 
 </style>

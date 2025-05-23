@@ -74,6 +74,10 @@ export class User {
 
         return sum;
     }
+
+    public hasLost(): boolean{
+        return this.getSumPoint() >= 100;
+    }
 }
 
 export class Point{
