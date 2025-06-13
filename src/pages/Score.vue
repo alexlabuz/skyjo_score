@@ -46,7 +46,6 @@
         </tbody>
     </table>
     <div class="header">
-        
         <img @click="goRanking" src="/src/assets/icons/ranking.svg" class="pointer"/>
         <button @click="score.validRound" :disabled="!getValidScore" class="btn">Valider la manche</button>
         <img src="/src/assets/icons/delete.svg" @click="score.removeData()" class="pointer" />

@@ -18,10 +18,8 @@ const routes = {
 
 const currentPath = ref(window.location.hash)
 
-console.log(`Page : ${currentPath.value}`)
 window.addEventListener('hashchange', () => {
   currentPath.value = window.location.hash
-  console.log(`Page : ${currentPath.value}`)
 })
 
 const currentView = computed(() => {

@@ -9,7 +9,7 @@
     <table class="row_rang">
         <tr v-for="(u, i) in ranking">
             <td class="position">{{ (i + 1) }}</td>
-            <td class="point">
+            <td class="point" :class="{lostPoint: u.hasLost()}">
                 <span>{{ u.getSumPoint() }}</span>
                 <span style="font-size: 12px;"> pts</span>
             </td>
@@ -64,6 +64,10 @@ onBeforeMount(() => {
 
 .row_rang td.point{
     width: 60px;
+}
+
+.row_rang td.lostPoint{
+    color: red;
 }
 
 </style>
