@@ -42,7 +42,7 @@ export class Game {
                 }
             }
 
-            const point = new Point(this.round, u.pointCurrentRound ?? 0, multiplicator)
+            const point = new Point(this.round, u.pointCurrentRound ?? 0, multiplicator);
             u.points.push(point);
         });
 
@@ -73,6 +73,16 @@ export class User {
         });
 
         return sum;
+    }
+
+    public getProgressionPoints(): number[] {
+        const progressionPoints: number[] = [];
+
+        this.points.forEach(p => {
+            progressionPoints.push((progressionPoints.slice(-1)[0] ?? 0) + p.getPointWithMultiplicator())
+        });
+
+        return progressionPoints;
     }
 
     public hasLost(): boolean{

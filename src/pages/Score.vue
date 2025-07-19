@@ -46,7 +46,10 @@
         </tbody>
     </table>
     <div class="header">
-        <img @click="goRanking" src="/src/assets/icons/ranking.svg" class="pointer"/>
+        <div style="display: flex; gap: 1em;">
+            <img @click="goRanking" src="/src/assets/icons/ranking.svg" class="pointer"/>
+            <img @click="goStats" src="/src/assets/icons/stats.svg" class="pointer"/>
+        </div>
         <button @click="score.validRound" :disabled="!getValidScore" class="btn">Valider la manche</button>
         <img src="/src/assets/icons/delete.svg" @click="score.removeData()" class="pointer" />
     </div>
@@ -77,13 +80,14 @@ function goRanking() {
     window.location.hash = "/rank"
 }
 
+function goStats() {
+    window.location.hash = "/stats"
+}
+
 onUnmounted(() => score.saveData());
 
 onBeforeMount(() => {
     score.saveData();
-    if(!score.data.gameStart){
-	    window.location.hash = '/';
-    }
 });
 
 </script>
