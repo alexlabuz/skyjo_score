@@ -1,3 +1,9 @@
+:root{
+    --primary: rgba(4, 116, 202, 0.8);
+    --secondary: rgba(118, 192, 253, 0.7);
+    --danger: rgb(213, 24, 52);
+}
+
 html, body, #app{
     height: 100%;
 }
@@ -5,10 +11,7 @@ html, body, #app{
 body{
     margin: 0;
     font-family: sans-serif;
-}
-
-input[type=text], input[type=number]{
-    padding: 5px;
+    background: linear-gradient(lightblue, aliceblue);
 }
 
 .header{
@@ -20,6 +23,7 @@ input[type=text], input[type=number]{
     padding-left: 8px;
     padding-right: 8px;
     box-sizing: border-box;
+    font-weight: bold;
 }
 
 .page{
@@ -32,6 +36,25 @@ input[type=text], input[type=number]{
     cursor: pointer;
 }
 
+.input{
+    padding: 9px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 8px;
+    font-size: 15px;
+}
+
 .btn{
-    padding: 1em;
+    padding: 9px;
+    border: 2px solid rgba(255, 255, 255, 0.4);
+    border-radius: 8px;
+    font-size: 15px;
+    background-color: var(--primary);
+    color: white;
+    cursor: pointer;
+}
+
+.btn:disabled{
+    background-color: whitesmoke;
+    color: silver;
+    border: 2px solid lightgray;
 }

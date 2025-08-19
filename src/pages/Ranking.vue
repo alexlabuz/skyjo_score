@@ -39,11 +39,11 @@ function backName() {
 }
 
 .row_rang tr{
-    background-color: bisque;
+    background-color: var(--secondary);
 }
 
 .row_rang tr:nth-child(even) {
-    background-color: antiquewhite;
+    filter: brightness(115%);
 }
 
 .row_rang td{
@@ -61,7 +61,7 @@ function backName() {
 }
 
 .row_rang td.lostPoint{
-    color: red;
+    color: var(--danger);
+    font-weight: bold;
 }
-
 </style>

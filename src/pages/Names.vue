@@ -1,17 +1,29 @@
 <template>
-<div class="page">
-	<h1>Saisir les noms</h1>
+    <div class="page">
+        <div class="header">
+            <div></div>
+            <p>Skyjo Calculator</p>
+            <div></div>
+        </div>
 
-	<div class="list_user">
-		<div v-for="(u, index) in score.data.users" class="user_name_input">
-			<input type="text" v-model="u.name" :placeholder="`Nom n°${index + 1}`" maxlength="12" :disabled="score.data.gameStart" />
-			<button @click="deleteUser(u)" :disabled="isDeleteUserDisabled">Suppimer</button>
-		</div>
-	</div>
+        <div class="list_user" style="margin: 5px">
+            <div v-for="(u, index) in score.data.users" class="user_name_input">
+                <input class="input" type="text" v-model="u.name" :placeholder="`Nom n°${index + 1}`" maxlength="12" :disabled="score.data.gameStart" />
+                <button class="btn" @click="deleteUser(u)" :disabled="isDeleteUserDisabled">
+                    <div class="icon_delete"></div>
+                </button>
+            </div>
 
-	<button @click="addUser" :disabled="isAddUserDisabled" style="margin-bottom: 1em;">Ajouter utilisateur</button>
-	<button :disabled="!getValidNames" @click="startGame">{{ !score.data.gameStart ? 'Commencer la partie' : 'Afficher les score'}}</button>
-</div>
+            <button class="btn btn_add" @click="addUser" :disabled="isAddUserDisabled" style="margin-bottom: 1em;">Ajouter joueur +</button>
+        </div>
+
+        <div class="header">
+            <div></div>
+            <button class="btn" :disabled="!getValidNames" @click="startGame">{{ !score.data.gameStart ? 'Commencer la partie' : 'Afficher les score'}}</button>
+            <div></div>
+        </div>
+
+    </div>
 </template>
 
 <script setup lang="ts">
@@ -44,13 +56,44 @@ function deleteUser(user: User) {
 
 <style scoped>
 .page{
-	align-items: start;
+    justify-content: space-between;
 }
+
+.list_user {
+    flex-grow: 1;
+}
+
 .user_name_input {
 	display: flex;
+    align-items: center;
+    gap: 9px;
+    margin-bottom: 8px;
 }
 
 .user_name_input input {
 	width: 100%;
 }
+
+.user_name_input button{
+    height: 39px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.icon_delete {
+    width: 16px;
+    height: 18px;
+    background-color: white;
+    mask: url('/src/assets/icons/delete.svg') no-repeat center;
+}
+
+.user_name_input button:disabled .icon_delete{
+    background-color: darkgray;
+}
+
+.btn_add{
+    width: 100%;
+}
+
 </style>

@@ -5,17 +5,19 @@
         <p>Score</p>
         <div></div>
     </div>
-    <table class="table_score">
-        <thead>
+
+    <div class="container_table">
+        <table class="table_score">
+            <thead>
             <tr>
-                <th>Round</th>
+                <th class="fixed_col">Round</th>
                 <th class="name" v-for="name in score.data.users">{{ name.name }}</th>
             </tr>
-        </thead>
-        <tbody>
+            </thead>
+            <tbody>
             <!--Points history-->
-            <tr v-for="indexRound in score.data.round">
-                <td class="round_number">{{ indexRound }}</td>
+            <tr class="point_history" v-for="indexRound in score.data.round">
+                <td class="fixed_col round_number">{{ indexRound }}</td>
                 <td class="user_point" v-for="point in score.data.users.map((u) => u.points)">
                     {{ point.find((p) => p.round === indexRound-1)?.point }}
                     <span v-if="(point.find((p) => p.round === indexRound-1)?.multiplicator ?? 1) > 1" class="multiplicator_span">
@@ -26,25 +28,27 @@
 
             <!--Points inputs-->
             <tr class="point_input">
-                <td class="round_number">{{ score.data.round + 1 }}</td>
+                <td class="fixed_col round_number">{{ score.data.round + 1 }}</td>
                 <td class="input_point" v-for="(u, i) in score.data.users">
-                    <input type="number" v-model="u.pointCurrentRound" max="120" min="-17">
+                    <input class="input" type="number" v-model="u.pointCurrentRound" max="120" min="-17">
                     <div>
                         <input :id="'end' + i" type="radio" :value="u" v-model="score.data.endRound"/>
-                        <label :for="'end' + i">Fin</label>
+                        <label :for="'end' + i"><b>Fin</b></label>
                     </div>
                 </td>
             </tr>
 
             <!--Total-->
             <tr class="total">
-                <td class="round_number">Total</td>
+                <td class="fixed_col round_number">Total</td>
                 <td v-for="user in score.data.users" class="total_user_point" :class="{lostPoint: user.hasLost()}">
                     {{ user.getSumPoint() }}
                 </td>
             </tr>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
+    </div>
+
     <div class="header">
         <div style="display: flex; gap: 1em;">
             <img @click="goRanking" src="/src/assets/icons/ranking.svg" class="pointer"/>
@@ -99,26 +103,44 @@ onBeforeMount(() => {
 }
 
 /*-Table-*/
+
+.container_table {
+    flex-grow: 1;
+}
+
 .table_score{
     border-collapse: collapse;
     display: block;
-    overflow-y: auto;
-    width: 100%;
-    flex-grow: 1;
-    font-size: 20px;
+    overflow-x: auto;
+    font-size: 18px;
+    text-align: center;
+    padding-bottom: 5px;
 }
 
-.table_score{
-    text-align: center;
+.fixed_col {
+    width: 80px;
+    position: sticky;
+    left: 0;
+    background-color: var(--secondary);
+}
+
+/*-th-*/
+th.name{
+    width: 120px;
+    min-width: 80px;
+    font-style: italic;
 }
 
 /*-tr-*/
-tr.total{
-    background-color: gray;
-    color: white;
+tr.point_history:nth-child(even) {
+    background-color: rgba(255,255,255,0.4);
 }
 tr.point_input{
-    background-color: antiquewhite;
+    background-color: var(--secondary);
+}
+tr.total{
+    background-color: var(--primary);
+    color: white;
 }
 
 /*-td-*/
@@ -132,11 +154,15 @@ td.total_user_point{
 }
 
 .lostPoint{
-    background-color: red;
+    background-color: var(--danger);
 }
 
 td.input_point{
     font-size: 16px;
+}
+
+td.input_point input{
+    padding: 2px;
 }
 
 .multiplicator_span{
