@@ -34,7 +34,6 @@ function backName() {
 
 <style scoped>
 .row_rang{
-    width: 100%;
     border-collapse: collapse;
 }
 
@@ -43,7 +42,7 @@ function backName() {
 }
 
 .row_rang tr:nth-child(even) {
-    filter: brightness(115%);
+    filter: brightness(106%);
 }
 
 .row_rang td{

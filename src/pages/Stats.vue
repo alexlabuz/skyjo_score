@@ -13,10 +13,14 @@
 </template>
 
 <script setup lang="ts">
+import Loading from '@/component/Loading.vue';
 import { useScoreStore } from '@/stores/score';
 import { defineAsyncComponent } from 'vue';
 
-const ChartScore = defineAsyncComponent(() => import("@/component/ChartScore.vue"));
+const ChartScore = defineAsyncComponent({
+    loader: () => import("@/component/ChartScore.vue"),
+    loadingComponent: Loading
+});
 
 const score = useScoreStore();
 

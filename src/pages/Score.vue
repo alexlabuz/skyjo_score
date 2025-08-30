@@ -18,7 +18,7 @@
             <!--Points history-->
             <tr class="point_history" v-for="indexRound in score.data.round">
                 <td class="fixed_col round_number">{{ indexRound }}</td>
-                <td class="user_point" v-for="point in score.data.users.map((u) => u.points)">
+                <td v-for="point in score.data.users.map((u) => u.points)">
                     {{ point.find((p) => p.round === indexRound-1)?.point }}
                     <span v-if="(point.find((p) => p.round === indexRound-1)?.multiplicator ?? 1) > 1" class="multiplicator_span">
                         {{ `x ${point.find((p) => p.round === indexRound-1)?.multiplicator}` }}
@@ -41,7 +41,7 @@
             <!--Total-->
             <tr class="total">
                 <td class="fixed_col round_number">Total</td>
-                <td v-for="user in score.data.users" class="total_user_point" :class="{lostPoint: user.hasLost()}">
+                <td v-for="user in score.data.users" :class="{lostPoint: user.hasLost()}">
                     {{ user.getSumPoint() }}
                 </td>
             </tr>
@@ -121,7 +121,6 @@ onBeforeMount(() => {
     width: 80px;
     position: sticky;
     left: 0;
-    background-color: var(--secondary);
 }
 
 /*-th-*/
@@ -133,7 +132,7 @@ th.name{
 
 /*-tr-*/
 tr.point_history:nth-child(even) {
-    background-color: rgba(255,255,255,0.4);
+    background-color: whitesmoke;
 }
 tr.point_input{
     background-color: var(--secondary);
@@ -146,11 +145,6 @@ tr.total{
 /*-td-*/
 td.round_number{
     font-weight: bold;
-}
-td.user_point{
-}
-td.total_user_point{
-
 }
 
 .lostPoint{

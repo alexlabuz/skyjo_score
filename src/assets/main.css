@@ -1,6 +1,6 @@
 :root{
-    --primary: rgba(4, 116, 202, 0.8);
-    --secondary: rgba(118, 192, 253, 0.7);
+    --primary: rgb(20, 130, 214);
+    --secondary: rgb(166, 215, 255);
     --danger: rgb(213, 24, 52);
 }
 
@@ -11,7 +11,6 @@ html, body, #app{
 body{
     margin: 0;
     font-family: sans-serif;
-    background: linear-gradient(lightblue, aliceblue);
 }
 
 .header{
@@ -38,14 +37,14 @@ body{
 
 .input{
     padding: 9px;
-    border: 2px solid rgba(255, 255, 255, 0.4);
+    border: 2px solid rgb(216, 216, 216);
     border-radius: 8px;
     font-size: 15px;
 }
 
 .btn{
     padding: 9px;
-    border: 2px solid rgba(255, 255, 255, 0.4);
+    border: 2px solid var(--secondary);
     border-radius: 8px;
     font-size: 15px;
     background-color: var(--primary);
